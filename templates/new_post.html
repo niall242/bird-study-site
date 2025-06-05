@@ -1,81 +1,100 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="form-section">
-    <h2>Log a Bird Sighting</h2>
+<div class="posts-wrapper">
+    <section class="form-section wide-form">
+        <h2>Log a Bird Sighting</h2>
 
-    <form id="post-form" method="POST" enctype="multipart/form-data">
-        <!-- Bird species (dropdown list) -->
-        <label for="species">Bird species:</label>
-        <select id="species" name="species" required>
-            <option value="">-- Select species --</option>
-            <option>Wood Pigeon</option>
-            <option>House Sparrow</option>
-            <option>Starling</option>
-            <option>Blue Tit</option>
-            <option>Blackbird</option>
-            <option>Robin</option>
-            <option>Goldfinch</option>
-            <option>Magpie</option>
-            <option>Other / Unknown</option>
-        </select>
+        <p class="form-description">
+            Fill in the details below to share your bird sighting with the community. Try to be as accurate as possible to help us better track bird activity across Centrala.
+        </p>
 
-        <!-- Location dropdown -->
-        <label for="location">Location (Centrala region):</label>
-        <select id="location" name="location" required>
-            <option value="">-- Select region --</option>
-            <option>Erean</option>
-            <option>Brunad</option>
-            <option>Bylyn</option>
-            <option>Docia</option>
-            <option>Marend</option>
-            <option>Pryn</option>
-            <option>Zord</option>
-            <option>Yaean</option>
-            <option>Frestin</option>
-            <option>Stonyam</option>
-            <option>Ryall</option>
-            <option>Ruril</option>
-            <option>Keivia</option>
-            <option>Tallan</option>
-            <option>Adohad</option>
-            <option>Obelyn</option>
-            <option>Holmer</option>
-            <option>Vertwall</option>
-        </select>
+        <form id="post-form" method="POST" enctype="multipart/form-data" class="form-grid">
+            <!-- Left Column -->
+            <div class="form-left">
+                <label for="species">Bird species:</label>
+                <select id="species" name="bird_species" required>
+                    <option value="">-- Select species --</option>
+                    <option>Wood Pigeon</option>
+                    <option>House Sparrow</option>
+                    <option>Starling</option>
+                    <option>Blue Tit</option>
+                    <option>Blackbird</option>
+                    <option>Robin</option>
+                    <option>Goldfinch</option>
+                    <option>Magpie</option>
+                    <option>Other / Unknown</option>
+                </select>
 
-        <!-- Activity type -->
-        <label for="activity">Activity observed:</label>
-        <select id="activity" name="activity" required>
-            <option value="">-- Select activity --</option>
-            <option>Visit</option>
-            <option>Feeding</option>
-            <option>Nesting</option>
-            <option>Other</option>
-        </select>
+                <label for="location">Location (Centrala region):</label>
+                <select id="location" name="location" required>
+                    <option value="">-- Select region --</option>
+                    <option>Erean</option>
+                    <option>Brunad</option>
+                    <option>Bylyn</option>
+                    <option>Docia</option>
+                    <option>Marend</option>
+                    <option>Pryn</option>
+                    <option>Zord</option>
+                    <option>Yaean</option>
+                    <option>Frestin</option>
+                    <option>Stonyam</option>
+                    <option>Ryall</option>
+                    <option>Ruril</option>
+                    <option>Keivia</option>
+                    <option>Tallan</option>
+                    <option>Adohad</option>
+                    <option>Obelyn</option>
+                    <option>Holmer</option>
+                    <option>Vertwall</option>
+                </select>
 
-        <!-- Date of sighting -->
-        <label for="date">Date of sighting:</label>
-        <input type="date" id="date" name="date" required>
+                <label for="activity">Activity observed:</label>
+                <select id="activity" name="activity" required>
+                    <option value="">-- Select activity --</option>
+                    <option>Perching</option>
+                    <option>Feeding</option>
+                    <option>Nesting</option>
+                    <option>Fighting</option>
+                    <option>Flying</option>
+                    <option>Singing</option>
+                    <option>Bathing</option>
+                    <option>Resting</option>
+                    <option>Other</option>
+                </select>
 
-        <!-- Time of sighting -->
-        <label for="time">Time of sighting:</label>
-        <input type="time" id="time" name="time" required>
+                <label for="date">Date of sighting:</label>
+                <input type="date" id="date" name="date" required>
 
-        <!-- Duration -->
-        <label for="duration">Duration (in minutes):</label>
-        <input type="number" id="duration" name="duration" min="1" max="999" required>
+                <label for="time">Time of sighting:</label>
+                <input type="time" id="time" name="time" required>
 
-        <!-- Comments -->
-        <label for="comments">Comments:</label>
-        <textarea id="comments" name="comments" rows="4"></textarea>
+                <label for="duration">Duration (in minutes):</label>
+                <input type="number" id="duration" name="duration" min="1" max="999" required>
+            </div>
 
-        <!-- Optional photo upload -->
-        <label for="photo">Upload a photo (JPG/PNG, max 1.2 MB):</label>
-        <input type="file" id="photo" name="photo" accept="image/jpeg, image/png">
+            <!-- Right Column -->
+            <div class="form-right">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" rows="8"></textarea>
 
-        <!-- Submit button -->
-        <button type="submit">Submit Post</button>
-    </form>
-</section>
+            <!-- Photo Upload -->
+            <label for="photo">Upload a photo (JPG/PNG, max 1.2 MB):</label>
+            <input type="file" id="photo" name="image" accept="image/jpeg, image/png">
+
+            <!-- Image Preview (inside right column) -->
+            <img id="preview" src="#" alt="Image Preview">
+
+            </div>
+
+            <!-- Full Width Submit Button -->
+            <div class="form-submit">
+                <button type="submit">Submit Post</button>
+            </div>
+        </form>
+    </section>
+</div>
 {% endblock %}
+
+
+

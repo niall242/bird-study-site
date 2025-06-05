@@ -88,6 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // 🐦 New post form validation
 document.addEventListener("DOMContentLoaded", () => {
     const postForm = document.getElementById("post-form");
+ 
+    let errors = [];
 
     if (postForm) {
         postForm.addEventListener("submit", function (event) {
@@ -106,8 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 errors.push("Please select a time for the sighting.");
             }
             const photo = document.getElementById("photo").files[0];
-
-            let errors = [];
 
             // Duration must be a number and greater than 0
             if (isNaN(duration) || duration < 1) {
@@ -191,3 +191,54 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// 🖼️ Image preview for uploaded photo
+document.addEventListener("DOMContentLoaded", () => {
+    const photoInput = document.getElementById("photo");
+    const preview = document.getElementById("preview");
+
+    if (photoInput) {
+        photoInput.addEventListener("change", function () {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "#";
+                preview.style.display = "none";
+            }
+        });
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const facts = [
+        "Birds are the only animals with feathers!",
+        "Some birds can sleep while flying.",
+        "Hummingbirds can flap their wings up to 80 times per second.",
+        "Owls can rotate their heads 270 degrees.",
+        "The Arctic Tern migrates over 40,000 miles a year!",
+        "Crows are known to use tools and solve puzzles."
+    ];
+
+    const factContainers = document.querySelectorAll(".fun-fact");
+
+    factContainers.forEach(container => {
+        const randomFact = facts[Math.floor(Math.random() * facts.length)];
+        container.textContent = `🐦 Fun Fact: ${randomFact}`;
+    });
+});
+
+function confirmDelete(postId) {
+    if (confirm("Are you sure you want to delete this post?")) {
+        window.location.href = "/delete-post/" + postId;
+    }
+}
+

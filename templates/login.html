@@ -3,17 +3,19 @@
 {% block content %}
 <!-- Login form section -->
 <section class="form-section">
-    <h2>Login to Your CTO Account</h2>
+    <h2>Login to Your Tweet Club Account</h2>
+
+    
 
     <!-- Login form (method=POST will be used when back-end is added) -->
     <form id="login-form" method="POST">
         <!-- Username or email field -->
         <label for="login-username">Username or Email:</label>
-        <input type="text" id="login-username" name="login-username" required>
+        <input type="text" id="login-username" name="username" required>
 
         <!-- Password field -->
         <label for="login-password">Password:</label>
-        <input type="password" id="login-password" name="login-password" required>
+        <input type="password" id="login-password" name="password" required>
 
         <!-- Submit button -->
         <button type="submit">Login</button>

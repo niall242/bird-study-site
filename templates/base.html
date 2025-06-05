@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CTO Bird Study Site</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='CTO-favicon.ico') }}">
     <script defer src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
     <header>
         <!-- Site Logo and Name -->
+        
+        
         <div class="logo">
-            <img src="https://via.placeholder.com/50" alt="CTO Logo">
-            <h1>CTO Bird Study</h1>
+        <a href="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='images/CTO-logo.png') }}" alt="CTO Logo">  
+        </a>
         </div>
 
         <!-- Responsive Hamburger Menu Button -->
@@ -21,15 +25,7 @@
         <!-- Navigation Bar -->
         <nav id="navbar">
             <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <!-- Always show this while testing -->
-                <li><a href="{{ url_for('upload') }}">New Post</a></li>
                 <li><a href="{{ url_for('all_posts') }}">All Posts</a></li>
-                <li><a href="{{ url_for('my_posts') }}">My Posts</a></li>
-
-
-
-
                 {% if not session.get('user_id') %}
                     <!-- Visible only if user NOT logged in -->
                     <li><a href="{{ url_for('register') }}">Register</a></li>
@@ -37,7 +33,6 @@
                 {% else %}
                     <!-- Visible only when user IS logged in -->
                     <li><a href="{{ url_for('upload') }}">New Post</a></li>
-                    <li><a href="{{ url_for('all_posts') }}">All Posts</a></li>
                     <li><a href="{{ url_for('my_posts') }}">My Posts</a></li>
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 {% endif %}
@@ -52,7 +47,35 @@
     </main>
 
     <footer>
-        <p>© Centrala Trust for Ornithology</p>
+        <div class="footer-top">
+            <div class="footer-links">
+                <a href="https://cto.example.com" target="_blank">CTO Website</a>
+                <a href="https://cea.example.com" target="_blank">CEA Website</a>
+                <a href="#">Help</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><img src="{{ url_for('static', filename='images/twitter-icon.png') }}" alt="Twitter"></a>
+                <a href="#"><img src="{{ url_for('static', filename='images/facebook-icon.png') }}" alt="Facebook"></a>
+                <a href="#"><img src="{{ url_for('static', filename='images/instagram-icon.png') }}" alt="Instagram"></a>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>© 2025 Centrala Trust for Ornithology |
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Terms of Service</a>
+            </p>
+        </div>
+        <p style="text-align: center; margin-top: 2em;">
+            <a href="https://jigsaw.w3.org/css-validator/check/referer">
+                <img style="border:0;width:88px;height:31px"
+                     src="https://jigsaw.w3.org/css-validator/images/vcss-blue"
+                     alt="Valid CSS!" />
+            </a>
+        </p>
+        
     </footer>
+    
 </body>
 </html>

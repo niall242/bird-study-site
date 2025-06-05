@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="posts-wrapper">
+    <section class="form-section wide-form">
+        <h2>Edit Your Bird Sighting</h2>
+
+        <p class="form-description">
+            Update the details of your bird sighting below. Try to be as accurate as possible to help us better track bird activity across Centrala.
+        </p>
+
+        <form id="post-form" method="POST" class="form-grid">
+            <!-- Left Column -->
+            <div class="form-left">
+                <label for="species">Bird species:</label>
+                <select id="species" name="bird_species" required>
+                    <option value="">-- Select species --</option>
+                    {% for species in ['Wood Pigeon', 'House Sparrow', 'Starling', 'Blue Tit', 'Blackbird', 'Robin', 'Goldfinch', 'Magpie', 'Other / Unknown'] %}
+                        <option value="{{ species }}" {% if post.bird_species == species %}selected{% endif %}>{{ species }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="location">Location (Centrala region):</label>
+                <select id="location" name="location" required>
+                    <option value="">-- Select region --</option>
+                    {% for region in ['Erean', 'Brunad', 'Bylyn', 'Docia', 'Marend', 'Pryn', 'Zord', 'Yaean', 'Frestin', 'Stonyam', 'Ryall', 'Ruril', 'Keivia', 'Tallan', 'Adohad', 'Obelyn', 'Holmer', 'Vertwall'] %}
+                        <option value="{{ region }}" {% if post.location == region %}selected{% endif %}>{{ region }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="activity">Activity observed:</label>
+                <select id="activity" name="activity" required>
+                    <option value="">-- Select activity --</option>
+                    {% for activity in ['Perching', 'Feeding', 'Nesting', 'Fighting', 'Flying', 'Singing', 'Bathing', 'Resting', 'Other'] %}
+                        <option value="{{ activity }}" {% if post.activity == activity %}selected{% endif %}>{{ activity }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="date">Date of sighting:</label>
+                <input type="date" id="date" name="date" value="{{ post.date }}" required>
+
+                <label for="time">Time of sighting:</label>
+                <input type="time" id="time" name="time" value="{{ post.time }}" required>
+
+                <label for="duration">Duration (in minutes):</label>
+                <input type="number" id="duration" name="duration" value="{{ post.duration }}" min="1" max="999" required>
+            </div>
+
+            <!-- Right Column -->
+            <div class="form-right">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" rows="8">{{ post.comments }}</textarea>
+            </div>
+
+            <!-- Full Width Submit Button -->
+            <div class="form-submit">
+                <button type="submit">Save Changes</button>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}
+

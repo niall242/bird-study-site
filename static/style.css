@@ -1,21 +1,49 @@
-/* General Page Layout */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
-    color: #333;
+/* =========================
+   CENTRALA TWEET CLUB CSS
+   Last updated: April 2025
+========================= */
+
+/* === Base Layout & Global Reset === */
+* {
+    box-sizing: border-box;
 }
 
-/*.landing-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-top: 1em;
-}*/
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #F5F5F5;
+    color: #222222;
+}
 
+main {
+    padding: 2em;
+}
 
+h2, h3 {
+    color: #002B5B;
+}
+
+button {
+    background-color: #00BFFF;
+    color: white;
+    border: none;
+    padding: 0.6em 1em;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0090C5;
+}
+
+.post-actions button {
+    font-weight: bold;
+}
+
+/* === Header and Navigation === */
 header {
-    background-color: #005073;
+    background-color: #002B5B;
     color: white;
     padding: 1em;
     display: flex;
@@ -24,7 +52,6 @@ header {
     flex-wrap: wrap;
 }
 
-/* Logo styling */
 .logo {
     display: flex;
     align-items: center;
@@ -32,25 +59,29 @@ header {
 }
 
 .logo img {
-    height: 50px;
+    height: 70px;
 }
 
-/* Navigation bar styling */
 nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 15px;
+    gap: 25px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    padding: 0.5em 1em;
+    display: block;
 }
 
-/* Responsive menu button (hamburger) */
+nav ul li a:hover {
+    color: #A8E10C;
+}
+
 .menu-toggle {
     display: none;
     font-size: 24px;
@@ -60,22 +91,347 @@ nav ul li a {
     cursor: pointer;
 }
 
-/* Main content area */
-main {
+/* === Footer === */
+footer {
+    background-color: #002B5B;
+    color: white;
     padding: 2em;
+    margin-top: 3em;
+    font-size: 0.95em;
 }
 
-/* Footer styling */
-footer {
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ffffff33;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
+
+.footer-links,
+.footer-social {
+    display: flex;
+    gap: 1.5em;
+    flex-wrap: wrap;
+}
+
+.footer-links a,
+.footer-bottom a {
+    color: #A8E10C;
+    text-decoration: none;
+}
+
+.footer-links a:hover,
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+.footer-social img {
+    height: 24px;
+    width: 24px;
+    transition: transform 0.2s ease;
+}
+
+.footer-social img:hover {
+    transform: scale(1.1);
+}
+
+.footer-bottom {
     text-align: center;
-    padding: 1em;
-    background-color: #00334e;
+    opacity: 0.8;
+}
+
+/* === Homepage Hero Section === */
+.hero-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+    margin-top: 2em;
+    padding: 2em;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.hero-text {
+    flex: 1 1 50%;
+}
+
+.hero-text h2 {
+    font-size: 2em;
+}
+
+.hero-text p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #333;
+}
+
+.hero-image {
+    flex: 1 1 45%;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* === Recent Uploads === */
+.recent-uploads {
+    padding: 2em;
+    margin-top: 2em;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.recent-uploads h3 {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.upload-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    justify-content: center;
+}
+
+.upload-grid img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* === Forms === */
+.form-section {
+    max-width: 500px;
+    margin: auto;
+    padding: 2em;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+}
+
+.form-section h2 {
+    text-align: center;
+    color: #005073;
+}
+
+form label {
+    display: block;
+    margin-top: 1em;
+    font-weight: bold;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 0.5em;
+    margin-top: 0.2em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    margin-top: 1.5em;
+    width: 100%;
+    padding: 0.75em;
+    background-color: #002B5B;
     color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+form button:hover {
+    background-color: #00334e;
+}
+
+.form-description {
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    font-size: 1.05em;
+    color: #444;
+}
+
+/* === Grid Layouts === */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+}
+
+.form-left,
+.form-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-submit {
+    grid-column: span 2;
+    text-align: center;
     margin-top: 2em;
 }
 
-/* Mobile styles */
-@media (max-width: 768px) {
+.wide-form {
+    max-width: 100%;
+}
+
+#preview,
+.form-right img#preview {
+    display: none;
+    margin-top: 1em;
+    max-width: 215px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+}
+
+/* === Posts Section === */
+.posts-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5em;
+}
+
+.post-section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#search {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.all-posts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+    margin: 2em 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.header-left {
+    flex: 1;
+}
+
+.header-right {
+    flex: 2;
+}
+
+.header-right p {
+    margin: 0;
+    font-size: 1.05em;
+    color: #444;
+}
+
+.post-wrapper {
+    padding: 1em 0;
+}
+
+.post-container {
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.post-image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.post-info {
+    flex: 1;
+}
+
+.post-comment {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.post-user {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 1em;
+    color: #555;
+}
+
+.post-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.left-detail {
+    text-align: left;
+}
+
+.right-detail {
+    text-align: right;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.post-actions button {
+    background-color: #002B5B;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-actions button:hover {
+    background-color: #004080;
+}
+
+.post-fact {
+    text-align: center;
+    margin-top: 1em;
+    font-size: 0.95em;
+    color: #666;
+    font-style: italic;
+}
+
+.post-separator {
+    border: none;
+    border-top: 2px solid #ccc;
+    margin: 2em 0;
+}
+
+/* === Responsive Design === */
+@media (max-width: 875px) {
     nav ul {
         display: none;
         flex-direction: column;
@@ -95,103 +451,48 @@ footer {
         padding: 1em;
         text-align: center;
     }
-}
 
-/* Registration form section container */
-.form-section {
-    max-width: 500px; /* Limit width for readability */
-    margin: auto; /* Center horizontally */
-    padding: 2em; /* Add space inside the box */
-    background-color: #ffffff; /* White background */
-    border-radius: 10px; /* Soft rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
+    .hero-section {
+        flex-direction: column;
+    }
 
-/* Form header */
-.form-section h2 {
-    text-align: center;
-    color: #005073; /* Match the header/nav color scheme */
-}
+    .hero-text, .hero-image {
+        flex: 1 1 100%;
+    }
 
-/* Label styling */
-form label {
-    display: block;
-    margin-top: 1em;
-    font-weight: bold;
-}
+    .hero-text h2 {
+        text-align: center;
+    }
 
-/* Input field styling */
-form input {
-    width: 100%; /* Full width */
-    padding: 0.5em;
-    margin-top: 0.2em;
-    box-sizing: border-box; /* Ensures padding doesn't expand width */
-}
+    .all-posts-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-/* Button styling */
-form button {
-    margin-top: 1.5em;
-    width: 100%;
-    padding: 0.75em;
-    background-color: #005073;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
+    .header-right p {
+        text-align: left;
+    }
 
-/* Button hover effect */
-form button:hover {
-    background-color: #00334e; /* Slightly darker blue */
-}
+    .form-grid {
+        display: flex;
+        flex-direction: column;
+    }
 
-.post-section {
-    max-width: 900px;
-    margin: auto;
-    padding: 2em;
-}
+    .form-left,
+    .form-right,
+    .form-preview,
+    .form-submit,
+    #search {
+        width: 100%;
+    }
 
-#search {
-    width: 100%;
-    padding: 0.8em;
-    margin-bottom: 1.5em;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+    .form-submit {
+        grid-column: span 1;
+        text-align: center;
+    }
 
-.post-card {
-    background-color: white;
-    padding: 1.5em;
-    margin-bottom: 1.5em;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    .post-container {
+        flex-direction: column;
+        align-items: center;
+    }
 }
-
-.post-card img {
-    width: 100%;
-    height: auto;
-    margin-top: 1em;
-    border-radius: 8px;
-}
-
-.post-actions {
-    margin-top: 1em;
-    display: flex;
-    gap: 10px;
-}
-
-.post-actions button {
-    padding: 0.5em 1em;
-    background-color: #005073;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.post-actions button:hover {
-    background-color: #00334e;
-}
-
