@@ -14,6 +14,10 @@ print("Max upload size set to:", app.config['MAX_CONTENT_LENGTH'])
 # Absolute database path
 DB_PATH = os.path.join(os.path.dirname(__file__), 'data.db')
 
+import subprocess
+subprocess.run(['python', 'init_db.py'], cwd=os.path.dirname(__file__))
+
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
