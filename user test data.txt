@@ -1,0 +1,98 @@
+Username	Email	Password
+birdwatcher1	lily.roberts@email.com	feather123
+magpieMike	mike.fields@email.net	shinyBird!1
+robinQueen	emma.nestling@email.org	tweetme2024
+wildJay92	jay.wilder@email.co.uk	forestView7
+sparrowScout	scout.woods@email.dev	flyHigh#89
+
+🐦 1 – Blackbird perching with berries around
+"This guy looked like he’d won the berry lottery! Sat there like royalty in the bush buffet. @robinQueen you’d love this spot — it’s berry madness right now."
+
+🐦 2 – Bluetit and Great Tit fighting
+"Caught this tiny turf war on camera — didn’t know bird feeders came with boxing rings! 😄 Pretty sure the bluetit threw the first peck."
+
+🐦 3 – Bluetit and Great Tit eating together from a feeder
+"Peace has been restored! Just one feeder, two birds, zero drama today. Nature really can get along."
+
+🐦 4 – 4 Jackdaws on a lawn
+"A whole council of jackdaws dropped in for a lawn meeting. Looked like they were plotting something... or just judging my gardening."
+
+🐦 5 – Kingfisher with a fish in its mouth
+"Finally spotted one! Kingfisher turned up, snatched a fish, and vanished like a feathered ninja. Still buzzing. 💙🔥"
+
+🐦 6 – Male and female Mandarin pair
+"Spotted this fashionable couple by the pond — she’s understated, he’s clearly overcompensating 😂 Nature’s best-dressed award goes to the mandarins again."
+
+🐦 7 – Robin perching with very wide open mouth
+"This little diva was absolutely belting out a tune. Looked like it was auditioning for 'Centrala’s Got Talent'. 🎤🎶"
+
+🐦 8 – Starling perching
+"Just one today, but I swear he gave me a full side-eye. These starlings always look like they’re judging you from a distance."
+
+🐦 9 – 8 Swifts flying high above
+"Felt like watching an air show. Eight swifts slicing through the sky like it’s no big deal. Took me a minute to count them all — they’re so fast!"
+
+🐦 10 – Wren perching, singing, tail sticking up
+"Couldn’t believe such a big sound came out of something so small! The tail flick alone deserves its own fan club."
+
+
+
+
+✅ What Is SQL Injection?
+It’s when someone enters malicious input to trick the database into running unintended SQL commands.
+
+Example attack input:
+Username: ' OR 1=1 --
+
+Password: anything
+
+If your SQL is poorly written, this could trick the query into returning all users and logging the attacker in.
+
+🔍 TC6.1 — Test Your Site
+Go to your login form and enter:
+Field	Input
+Username	' OR 1=1 --
+Password	doesntmatter
+
+Then click Log In.
+
+✅ If your site is safe:
+You should see: "Invalid credentials"
+
+No one gets logged in
+
+No crash or error occurs
+
+🧠 Why You’re Probably Already Safe
+In your app.py, you use a parameterized query like this:
+
+python
+Copy
+Edit
+c.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+That’s safe — it prevents injection by treating user input as data, not SQL.
+
+❌ If It’s Not Safe
+If your code used something like:
+
+python
+Copy
+Edit
+query = f"SELECT * FROM users WHERE username='{username}' AND password='{password}'"
+…then injection would work — and that would fail TC6.1.
+
+Let me know what happens when you try the ' OR 1=1 -- input — and we’ll confirm if your site passes TC6.1 ✅.
+
+✅ Why Your Site Blocks This
+In your app.py, your login query looks like this:
+
+python
+Copy
+Edit
+c.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+This is a parameterized query.
+
+🛡️ It sends the ' OR 1=1 -- literally as a string — it does not get interpreted as SQL.
+
+So the database searches for a username that is exactly ' OR 1=1 -- — which doesn’t exist — and login fails.
+

@@ -12,7 +12,7 @@ c.execute('''
     )
 ''')
 
-# Create posts table (we’ll use this later)
+# Create posts table 
 c.execute('''
     CREATE TABLE IF NOT EXISTS posts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

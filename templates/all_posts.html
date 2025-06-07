@@ -27,7 +27,7 @@
 
         <div id="post-list">
             {% for post in posts %}
-            <div class="post-wrapper">
+            <div class="post-wrapper" id="post-{{ post.id }}">
                 <div class="post-container">
                     <!-- Left: Image -->
                     <div class="post-image">
@@ -66,7 +66,6 @@
                 <div class="post-fact">
                     <em class="fun-fact"></em>
                 </div>
-                
                 <hr class="post-separator">
             </div>
             {% endfor %}

@@ -4,10 +4,16 @@
 {% block content %}
 <section class="hero-section">
     <div class="hero-text">
-        <h2>Welcome to The Centrala Tweet Club</h2>
+        <h2>The Centrala Tweet Club</h2>
         <p>
-            Join a growing community of nature lovers and citizen scientists who are helping track bird activity across Centrala.  
-            Log your sightings, share observations, and contribute to real conservation efforts — all while enjoying the outdoors!
+            Welcome citizens of Centrala! This website has been developed with the goal to learn more about our local birds. 
+            How many migrant birds do we see each year? What are their favourite places to hang out? Whats' the rarest bird 
+            you have seen? We encourage every local resident to post their observations on this forum along with a picture 
+            if you can. This website is a collaboration of the CEA and the CTO - their aim is to encourage more wildlife in 
+            the area. They will take your opinions and use them for conservation and to help develop some great new green 
+            spaces in Centrala and the surrounding area. It doesn't matter how mundane your comment is or how blurry the 
+            picture is, we would love to hear what you have to say. And, of course, there's nothing stopping you from making 
+            a friend or two along the way :) We can all benefit from the social creatures that tweet around us 🐦
         </p>
     </div>
     
@@ -20,10 +26,13 @@
     <h3>Recent Uploads</h3>
 
     <div class="upload-grid">
-        <img src="https://source.unsplash.com/300x200/?bird,1" alt="Recent upload 1">
-        <img src="https://source.unsplash.com/300x200/?bird,2" alt="Recent upload 2">
-        <img src="https://source.unsplash.com/300x200/?bird,3" alt="Recent upload 3">
+        {% for img in images %}
+            <a href="{{ url_for('all_posts') }}#post-{{ img.id }}">
+                <img src="{{ url_for('static', filename='uploads/' ~ img.image_filename) }}" alt="Recent upload">
+            </a>
+        {% endfor %}
     </div>
+    
 </section>
 
 {% endblock %}

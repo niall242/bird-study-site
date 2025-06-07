@@ -8,30 +8,46 @@ app.secret_key = 'your_secret_key_here'  # Replace with a strong secret key
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 6 * 1024 * 1024  # 6 MB
+print("Max upload size set to:", app.config['MAX_CONTENT_LENGTH'])
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    with sqlite3.connect('data.db') as conn:
+        conn.row_factory = sqlite3.Row
+        c = conn.cursor()
+        c.execute("""
+            SELECT id, image_filename 
+            FROM posts 
+            WHERE image_filename IS NOT NULL 
+            ORDER BY id DESC 
+            LIMIT 3
+        """)
+        images = c.fetchall()
+
+    return render_template('index.html', images=images)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        email = request.form['email']
 
         with sqlite3.connect('data.db') as conn:
             c = conn.cursor()
             try:
-                c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+                c.execute("INSERT INTO users (username, password, email) VALUES (?, ?, ?)", 
+                          (username, password, email))
                 conn.commit()
                 flash('Registration successful! Please log in.')
                 return redirect(url_for('login'))
             except sqlite3.IntegrityError:
                 flash('Username already taken.')
-    
+
     return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -74,9 +90,13 @@ def upload():
         image = request.files['image']
         filename = None
 
-        if image and allowed_file(image.filename):
-            filename = secure_filename(image.filename)
-            image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        if image and image.filename != "":
+            if allowed_file(image.filename):
+                filename = secure_filename(image.filename)
+                image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                flash("Your file is not supported (JPG or PNG required). You can also upload without a picture.")
+                return render_template('new_post.html')
 
         with sqlite3.connect('data.db') as conn:
             c = conn.cursor()
@@ -163,7 +183,7 @@ def edit_post(post_id):
 
         if not post:
             flash("Post not found or access denied.")
-            return redirect(url_for('my_posts'))
+            return redirect(url_for('all_posts'))
 
         if request.method == 'POST':
             location = request.form['location']
@@ -182,7 +202,7 @@ def edit_post(post_id):
             conn.commit()
 
             flash("Post updated successfully.")
-            return redirect(url_for('my_posts'))
+            return redirect(url_for('all_posts'))
 
     return render_template('edit_post.html', post=post)
 
@@ -216,7 +236,7 @@ def delete_post(post_id):
         conn.commit()
 
     flash("Post deleted successfully.")
-    return redirect(url_for('my_posts'))
+    return redirect(url_for('all_posts'))
 
 
 

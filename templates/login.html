@@ -5,12 +5,20 @@
 <section class="form-section">
     <h2>Login to Your Tweet Club Account</h2>
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     
-
     <!-- Login form (method=POST will be used when back-end is added) -->
     <form id="login-form" method="POST">
         <!-- Username or email field -->
-        <label for="login-username">Username or Email:</label>
+        <label for="login-username">Username:</label>
         <input type="text" id="login-username" name="username" required>
 
         <!-- Password field -->

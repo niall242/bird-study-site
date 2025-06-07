@@ -6,6 +6,17 @@
 <section class="form-section">
     <h2>Create a Tweet Club Account</h2>
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+
     <!-- Registration form (uses POST method, processing will come later) -->
     <form id="register-form" method="POST">
 

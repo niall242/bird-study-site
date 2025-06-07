@@ -5,6 +5,16 @@
     <section class="form-section wide-form">
         <h2>Log a Bird Sighting</h2>
 
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% endwith %}
+
         <p class="form-description">
             Fill in the details below to share your bird sighting with the community. Try to be as accurate as possible to help us better track bird activity across Centrala.
         </p>
@@ -15,72 +25,54 @@
                 <label for="species">Bird species:</label>
                 <select id="species" name="bird_species" required>
                     <option value="">-- Select species --</option>
-                    <option>Wood Pigeon</option>
-                    <option>House Sparrow</option>
-                    <option>Starling</option>
-                    <option>Blue Tit</option>
-                    <option>Blackbird</option>
-                    <option>Robin</option>
-                    <option>Goldfinch</option>
-                    <option>Magpie</option>
-                    <option>Other / Unknown</option>
+                    {% for species in ['Wood Pigeon', 'House Sparrow', 'Starling', 'Blue Tit', 'Blackbird', 'Robin', 'Goldfinch', 'Magpie', 'Other / Unknown'] %}
+                        <option value="{{ species }}" {% if request.form.get('bird_species') == species %}selected{% endif %}>{{ species }}</option>
+                    {% endfor %}
                 </select>
+                
 
                 <label for="location">Location (Centrala region):</label>
                 <select id="location" name="location" required>
                     <option value="">-- Select region --</option>
-                    <option>Erean</option>
-                    <option>Brunad</option>
-                    <option>Bylyn</option>
-                    <option>Docia</option>
-                    <option>Marend</option>
-                    <option>Pryn</option>
-                    <option>Zord</option>
-                    <option>Yaean</option>
-                    <option>Frestin</option>
-                    <option>Stonyam</option>
-                    <option>Ryall</option>
-                    <option>Ruril</option>
-                    <option>Keivia</option>
-                    <option>Tallan</option>
-                    <option>Adohad</option>
-                    <option>Obelyn</option>
-                    <option>Holmer</option>
-                    <option>Vertwall</option>
+                    {% for region in ['Erean', 'Brunad', 'Bylyn', 'Docia', 'Marend', 'Pryn', 'Zord', 'Yaean', 'Frestin', 'Stonyam', 'Ryall', 'Ruril', 'Keivia', 'Tallan', 'Adohad', 'Obelyn', 'Holmer', 'Vertwall'] %}
+                        <option value="{{ region }}" {% if request.form.get('location') == region %}selected{% endif %}>{{ region }}</option>
+                    {% endfor %}
                 </select>
+                
 
                 <label for="activity">Activity observed:</label>
                 <select id="activity" name="activity" required>
                     <option value="">-- Select activity --</option>
-                    <option>Perching</option>
-                    <option>Feeding</option>
-                    <option>Nesting</option>
-                    <option>Fighting</option>
-                    <option>Flying</option>
-                    <option>Singing</option>
-                    <option>Bathing</option>
-                    <option>Resting</option>
-                    <option>Other</option>
+                    {% for activity in ['Perching', 'Feeding', 'Nesting', 'Fighting', 'Flying', 'Singing', 'Bathing', 'Resting', 'Other'] %}
+                        <option value="{{ activity }}" {% if request.form.get('activity') == activity %}selected{% endif %}>{{ activity }}</option>
+                    {% endfor %}
                 </select>
 
                 <label for="date">Date of sighting:</label>
-                <input type="date" id="date" name="date" required>
+                <input type="date" id="date" name="date" value="{{ request.form.get('date', '') }}" required>
 
                 <label for="time">Time of sighting:</label>
-                <input type="time" id="time" name="time" required>
+                <input type="time" id="time" name="time" value="{{ request.form.get('time', '') }}" required>
+
 
                 <label for="duration">Duration (in minutes):</label>
-                <input type="number" id="duration" name="duration" min="1" max="999" required>
+                <input type="number" id="duration" name="duration" min="1" max="999" value="{{ request.form.get('duration', '') }}" required>
             </div>
 
             <!-- Right Column -->
             <div class="form-right">
                 <label for="comments">Comments:</label>
-                <textarea id="comments" name="comments" rows="8"></textarea>
+                <textarea id="comments" name="comments" rows="8" required placeholder="Add your notes, reactions, or observations here...">{{ request.form.get('comments', '') }}</textarea>
+
+
 
             <!-- Photo Upload -->
-            <label for="photo">Upload a photo (JPG/PNG, max 1.2 MB):</label>
+            <label for="photo">Upload a photo (JPG/PNG, max 6 MB):</label>
             <input type="file" id="photo" name="image" accept="image/jpeg, image/png">
+            <small class="upload-note">
+                Tweet Club members love to see pictures of all birds great and small — please upload one if you can (optional).
+            </small>
+
 
             <!-- Image Preview (inside right column) -->
             <img id="preview" src="#" alt="Image Preview">

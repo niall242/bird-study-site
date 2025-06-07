@@ -114,10 +114,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 errors.push("Please enter a valid duration in minutes.");
             }
 
-            // Photo (if provided) must be under 1.2MB
-            if (photo && photo.size > 1200000) {
-                errors.push("Image must be 1.2 MB or less.");
+            // Photo (if provided) must be under 6MB
+            if (photo && photo.size > 6000000) {
+                errors.push("Image must be 6 MB or less.");
             }
+            
 
             if (errors.length > 0) {
                 event.preventDefault();
@@ -220,19 +221,72 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const facts = [
-        "Birds are the only animals with feathers!",
+        "Peregrine falcons are the fastest animals on Earth, diving at over 240 mph.",
+        "Hummingbirds can fly backward and hover in place.",
         "Some birds can sleep while flying.",
-        "Hummingbirds can flap their wings up to 80 times per second.",
-        "Owls can rotate their heads 270 degrees.",
-        "The Arctic Tern migrates over 40,000 miles a year!",
+        "Owls can rotate their heads up to 270 degrees but can't move their eyes.",
+        "Flamingos are born gray — their pink color comes from their diet.",
+        "Chickens have over 200 distinct vocalizations.",
+        "Kiwi birds have nostrils at the tip of their beaks.",
+        "White bellbirds are the loudest birds, hitting 125 decibels.",
+        "Penguins are excellent swimmers but can't fly.",
+        "Northern shrikes impale prey on thorns or wire to store food.",
+        "Cockatoos in Sydney have learned to use public water fountains.",
+        "Albatrosses have a wingspan of up to 11 feet.",
+        "Bee hummingbirds are the smallest birds — only about 2 inches long.",
+        "Ostriches are the largest birds and can sprint at 45 mph.",
+        "Emus, the second-largest birds, can run up to 30 mph.",
+        "Kakapos are nocturnal, flightless parrots from New Zealand.",
+        "Penguins use their wings as flippers for underwater travel.",
+        "Birds are the only living animals with feathers.",
+        "Birds breathe with a one-way airflow system through their lungs.",
+        "Some birds, like the white-throated sparrow, have color-based personalities.",
+        "Black-capped chickadees grow bigger brains in autumn to remember food caches.",
+        "Bird bones are hollow, making them light enough to fly.",
+        "The Arctic tern migrates over 44,000 miles every year.",
+        "Lyrebirds can mimic chainsaws and camera shutters.",
+        "Common swifts can stay airborne for 10 months straight.",
+        "Secretary birds hunt snakes by stomping them to death.",
+        "Oilbirds use echolocation to navigate dark caves.",
+        "Harpy eagles have talons as strong as a bear’s grip.",
+        "Bearded vultures eat bones for the marrow inside.",
+        "American woodcocks perform aerial “sky dances” to attract mates.",
+        "Eurasian wrynecks twist their heads like snakes when threatened.",
+        "Red-capped manakins dance like they’re moonwalking.",
+        "Wilson’s bird-of-paradise cleans its display court to impress females.",
+        "Blue-footed boobies use their colorful feet in mating dances.",
+        "Great potoos are masters of camouflage, looking like broken branches.",
+        "Tawny frogmouths blend perfectly with tree bark.",
+        "European cuckoos lay eggs in other birds’ nests.",
+        "Bar-tailed godwits fly nonstop from Alaska to New Zealand.",
         "Crows are known to use tools and solve puzzles."
     ];
 
+    // Shuffle the facts array
+    for (let i = facts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [facts[i], facts[j]] = [facts[j], facts[i]];
+    }
+
+    // Assign each shuffled fact to a .fun-fact element
     const factContainers = document.querySelectorAll(".fun-fact");
 
-    factContainers.forEach(container => {
-        const randomFact = facts[Math.floor(Math.random() * facts.length)];
-        container.textContent = `🐦 Fun Fact: ${randomFact}`;
+    factContainers.forEach((container, i) => {
+        container.textContent = `🐦 Fun Fact: ${facts[i % facts.length]}`;
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search');
+    const posts = document.querySelectorAll('.post-wrapper');
+
+    searchInput.addEventListener('input', () => {
+        const term = searchInput.value.toLowerCase();
+
+        posts.forEach(post => {
+            const text = post.innerText.toLowerCase();
+            post.style.display = text.includes(term) ? '' : 'none';
+        });
     });
 });
 
