@@ -2,10 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import sqlite3
 import os
 from werkzeug.utils import secure_filename
-import subprocess
-
-subprocess.run(['python', './init_db.py'], cwd=os.path.dirname(__file__))
-
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'  # Replace with a strong secret key
