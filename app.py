@@ -14,12 +14,6 @@ print("Max upload size set to:", app.config['MAX_CONTENT_LENGTH'])
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-import subprocess
-
-# TEMPORARY: Run init_db.py on first launch
-if not os.path.exists('data.db'):
-    subprocess.run(['python', 'init_db.py'])
-
 @app.route('/')
 def home():
     with sqlite3.connect('data.db') as conn:
