@@ -14,6 +14,36 @@ print("Max upload size set to:", app.config['MAX_CONTENT_LENGTH'])
 # Absolute database path
 DB_PATH = os.path.join(os.path.dirname(__file__), 'data.db')
 
+# TEMP: Initialize DB schema directly
+if not os.path.exists(DB_PATH):
+    with sqlite3.connect(DB_PATH) as conn:
+        c = conn.cursor()
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL
+            )
+        ''')
+        c.execute('''
+            CREATE TABLE IF NOT EXISTS posts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                location TEXT,
+                bird_species TEXT,
+                activity TEXT,
+                duration INTEGER,
+                date TEXT,
+                time TEXT,
+                comments TEXT,
+                image_filename TEXT,
+                FOREIGN KEY (user_id) REFERENCES users(id)
+            )
+        ''')
+        conn.commit()
+    print("✅ Database initialized via embedded code.")
+
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
