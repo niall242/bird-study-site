@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import sqlite3
 import os
 from werkzeug.utils import secure_filename
+from werkzeug.exceptions import RequestEntityTooLarge
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'  # Replace with a strong secret key
@@ -240,6 +241,11 @@ def delete_post(post_id):
         conn.commit()
     flash("Post deleted successfully.")
     return redirect(url_for('all_posts'))
+
+@app.errorhandler(RequestEntityTooLarge)
+def handle_large_file(e):
+    flash("Your image must be 6MB or less.")
+    return render_template("new_post.html"), 413
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
